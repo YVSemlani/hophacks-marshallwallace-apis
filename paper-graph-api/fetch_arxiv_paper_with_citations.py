@@ -2,6 +2,7 @@ import requests
 import xml.etree.ElementTree as ET
 import json
 from datetime import datetime
+from flask import Flask, jsonify
 
 def fetch_arxiv_paper(arxiv_id):
     base_url = 'http://export.arxiv.org/api/query?'
@@ -28,32 +29,43 @@ def fetch_arxiv_paper(arxiv_id):
     print(f"Error: Unable to fetch data. Status code: {response.status_code}")
     return None
 
-def fetch_top_citations(arxiv_id, top_n=20):
-    semantic_scholar_url = f"https://api.semanticscholar.org/v1/paper/arXiv:{arxiv_id}"
+def fetch_doi_citations(doi):
+    semantic_scholar_url = f"https://api.semanticscholar.org/v1/paper/doi:{doi}"
+    response = requests.get(semantic_scholar_url)
+
+def fetch_top_citations(some_id, id_type, top_n=5):
+    if id_type == 'arxiv':
+        semantic_scholar_url = f"https://api.semanticscholar.org/v1/paper/arxiv:{some_id}"
+    elif id_type == 'doi':
+        semantic_scholar_url = f"https://api.semanticscholar.org/v1/paper/doi:{some_id}"
+    else:
+        print("Invalid ID type")
+        return []
     response = requests.get(semantic_scholar_url)
     
     if response.status_code == 200:
         data = response.json()
         all_citations = data.get('citations', [])
+        if all_citations == []:
+            all_citations = data.get('references', [])
         
         # Sort citations by citationCount in descending order and take top N
         top_citations = sorted(all_citations, key=lambda x: x.get('citationCount', 0), reverse=True)[:top_n]
         
+        if id_type == 'doi':
+            print(top_citations)
         # Extract relevant information and arXiv ID if available
         processed_citations = []
         for citation in top_citations:
-            arxiv_id = None
-            for id_info in citation.get('identifiers', []):
-                if id_info.get('type') == 'ArXiv':
-                    arxiv_id = id_info.get('id')
-                    break
-            
+            print(citation)
+            doi = citation['doi']
+        
             processed_citations.append({
                 'title': citation.get('title'),
                 'authors': [author.get('name') for author in citation.get('authors', [])],
                 'year': citation.get('year'),
                 'citationCount': citation.get('citationCount'),
-                'arxiv_id': arxiv_id
+                'doi': doi
             })
         
         return processed_citations
@@ -66,17 +78,33 @@ def save_to_json(data, filename):
         json.dump(data, f, ensure_ascii=False, indent=4)
 
 if __name__ == "__main__":
-    arxiv_id = "2103.00020"  # Example arXiv ID
-    paper = fetch_arxiv_paper(arxiv_id)
+    arxiv_id = "1706.03762"  # Example arXiv ID
+    original_paper = fetch_arxiv_paper(arxiv_id)
+
+    print(original_paper)
+    print('-'*50)
     
-    if paper:
-        top_citations = fetch_top_citations(arxiv_id)
-        paper['top_citations'] = top_citations
+    if original_paper:
+        top_citations = fetch_top_citations(arxiv_id, 'arxiv')
+
+        print(type(top_citations))
+        print('-'*50)
+
+        for idx, paper in enumerate(top_citations):
+            print(paper['doi'])
+            tertiary_citations = fetch_top_citations(paper['doi'], 'doi')
+            print(tertiary_citations)
+            top_citations[idx]['top_citations'] = tertiary_citations
+
+        original_paper['top_citations'] = top_citations
+
+        print(json.dumps(original_paper, indent=4))
+        print('-'*50)
         
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         filename = f"arxiv_paper_with_top_citations_{timestamp}.json"
         
-        save_to_json(paper, filename)
+        #save_to_json(paper, filename)
         print(f"Data saved to {filename}")
         print(f"Number of top citations: {len(top_citations)}")
     else:

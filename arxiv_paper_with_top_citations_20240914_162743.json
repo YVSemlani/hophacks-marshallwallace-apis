@@ -30,7 +30,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1016/j.neucom.2024.128426"
         },
         {
             "title": "A lightweight Transformer-based visual question answering network with Weight-Sharing Hybrid Attention",
@@ -42,7 +42,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1016/j.neucom.2024.128460"
         },
         {
             "title": "Zero-Shot Content-Based Crossmodal Recommendation System",
@@ -57,7 +57,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1016/j.eswa.2024.125108"
         },
         {
             "title": "A review on video person re-identification based on deep learning",
@@ -71,7 +71,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1016/j.neucom.2024.128479"
         },
         {
             "title": "FMC: Multimodal fake news detection based on multi-granularity feature fusion and contrastive learning",
@@ -84,7 +84,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1016/j.aej.2024.08.103"
         },
         {
             "title": "Text-guided Graph Temporal Modeling for few-shot video classification",
@@ -101,7 +101,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1016/j.engappai.2024.109076"
         },
         {
             "title": "Adding compact parameter blocks to multimodal transformers to detect harmful memes",
@@ -111,7 +111,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1016/j.engappai.2024.109136"
         },
         {
             "title": "PILL: Plug into LLM with adapter expert and attention gate",
@@ -125,7 +125,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1016/j.asoc.2024.112115"
         },
         {
             "title": "Hierarchical visual semantic guidance for enhanced relationship recognition in domain knowledge graphs",
@@ -136,7 +136,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1016/j.engappai.2024.109040"
         },
         {
             "title": "Self-prompting semantic segmentation of bridge point cloud data using a large computer vision model",
@@ -152,7 +152,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1016/j.autcon.2024.105729"
         },
         {
             "title": "Integrating multimodal contrastive learning with prototypical domain alignment for unsupervised domain adaptation of time series",
@@ -164,7 +164,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1016/j.engappai.2024.109205"
         },
         {
             "title": "Hierarchical Multi-Modal Fusion for Language-Conditioned Robotic Grasping Detection in Clutter",
@@ -177,7 +177,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1109/LRA.2024.3440833"
         },
         {
             "title": "Full-view salient feature mining and alignment for text-based person search",
@@ -191,7 +191,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1016/j.eswa.2024.124071"
         },
         {
             "title": "Few-shot learning for structural health diagnosis of civil infrastructure",
@@ -203,7 +203,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1016/j.aei.2024.102650"
         },
         {
             "title": "Image generation of hazardous situations in construction sites using text-to-image generative model for training deep neural networks",
@@ -213,7 +213,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1016/j.autcon.2024.105615"
         },
         {
             "title": "BagFormer: Better cross-modal retrieval via bag-wise interaction",
@@ -224,7 +224,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1016/j.engappai.2024.108912"
         },
         {
             "title": "Parallel weight control based on policy gradient of relation refinement for cross-modal retrieval",
@@ -237,7 +237,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1016/j.engappai.2024.108949"
         },
         {
             "title": "Probing vision and language models for construction waste material recognition",
@@ -248,7 +248,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1016/j.autcon.2024.105629"
         },
         {
             "title": "High-fidelity instructional fashion image editing",
@@ -261,7 +261,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1016/j.gmod.2024.101223"
         },
         {
             "title": "SARD: Fake news detection based on CLIP contrastive learning and multimodal semantic alignment",
@@ -274,7 +274,7 @@
             ],
             "year": 2024,
             "citationCount": null,
-            "arxiv_id": null
+            "doi": "10.1016/j.jksuci.2024.102160"
         }
     ]
 }
