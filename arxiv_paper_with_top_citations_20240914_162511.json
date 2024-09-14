@@ -1,0 +1,280 @@
+{
+    "arxiv_id": "2103.00020",
+    "title": "Learning Transferable Visual Models From Natural Language Supervision",
+    "authors": [
+        "Alec Radford",
+        "Jong Wook Kim",
+        "Chris Hallacy",
+        "Aditya Ramesh",
+        "Gabriel Goh",
+        "Sandhini Agarwal",
+        "Girish Sastry",
+        "Amanda Askell",
+        "Pamela Mishkin",
+        "Jack Clark",
+        "Gretchen Krueger",
+        "Ilya Sutskever"
+    ],
+    "summary": "State-of-the-art computer vision systems are trained to predict a fixed set\nof predetermined object categories. This restricted form of supervision limits\ntheir generality and usability since additional labeled data is needed to\nspecify any other visual concept. Learning directly from raw text about images\nis a promising alternative which leverages a much broader source of\nsupervision. We demonstrate that the simple pre-training task of predicting\nwhich caption goes with which image is an efficient and scalable way to learn\nSOTA image representations from scratch on a dataset of 400 million (image,\ntext) pairs collected from the internet. After pre-training, natural language\nis used to reference learned visual concepts (or describe new ones) enabling\nzero-shot transfer of the model to downstream tasks. We study the performance\nof this approach by benchmarking on over 30 different existing computer vision\ndatasets, spanning tasks such as OCR, action recognition in videos,\ngeo-localization, and many types of fine-grained object classification. The\nmodel transfers non-trivially to most tasks and is often competitive with a\nfully supervised baseline without the need for any dataset specific training.\nFor instance, we match the accuracy of the original ResNet-50 on ImageNet\nzero-shot without needing to use any of the 1.28 million training examples it\nwas trained on. We release our code and pre-trained model weights at\nhttps://github.com/OpenAI/CLIP.",
+    "published": "2021-02-26T19:04:58Z",
+    "link": "http://arxiv.org/abs/2103.00020v1",
+    "top_citations": [
+        {
+            "title": "Modeling the skeleton-language uncertainty for 3D action recognition",
+            "authors": [
+                "Mingdao Wang",
+                "Xianlin Zhang",
+                "Siqi Chen",
+                "Xueming Li",
+                "Yue Zhang"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        },
+        {
+            "title": "A lightweight Transformer-based visual question answering network with Weight-Sharing Hybrid Attention",
+            "authors": [
+                "Yue Zhu",
+                "Dongyue Chen",
+                "Tong Jia",
+                "Shizhuo Deng"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        },
+        {
+            "title": "Zero-Shot Content-Based Crossmodal Recommendation System",
+            "authors": [
+                "Federico D’Asaro",
+                "Sara De Luca",
+                "Lorenzo Bongiovanni",
+                "Giuseppe Rizzo",
+                "Symeon Papadopoulos",
+                "Emmanouil Schinas",
+                "C. Koutlis"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        },
+        {
+            "title": "A review on video person re-identification based on deep learning",
+            "authors": [
+                "Haifei Ma",
+                "Canlong Zhang",
+                "Yifeng Zhang",
+                "Zhixin Li",
+                "Zhiwen Wang",
+                "Chunrong Wei"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        },
+        {
+            "title": "FMC: Multimodal fake news detection based on multi-granularity feature fusion and contrastive learning",
+            "authors": [
+                "Facheng Yan",
+                "Mingshu Zhang",
+                "Bin Wei",
+                "Kelan Ren",
+                "Wen Jiang"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        },
+        {
+            "title": "Text-guided Graph Temporal Modeling for few-shot video classification",
+            "authors": [
+                "Fuqin Deng",
+                "Jiaming Zhong",
+                "Nannan Li",
+                "Lanhui Fu",
+                "Bingchun Jiang",
+                "Ningbo Yi",
+                "Feng Qi",
+                "He Xin",
+                "Tin Lun Lam"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        },
+        {
+            "title": "Adding compact parameter blocks to multimodal transformers to detect harmful memes",
+            "authors": [
+                "Paulo Hermida",
+                "Eulanda M. dos Santos"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        },
+        {
+            "title": "PILL: Plug into LLM with adapter expert and attention gate",
+            "authors": [
+                "Yuyu Yin",
+                "Fangyuan Zhang",
+                "Zhengyuan Wu",
+                "Qibo Qiu",
+                "Tingting Liang",
+                "Xin Zhang"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        },
+        {
+            "title": "Hierarchical visual semantic guidance for enhanced relationship recognition in domain knowledge graphs",
+            "authors": [
+                "Xinzhi Wang",
+                "Jiayu Guo",
+                "Xiangfeng Luo"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        },
+        {
+            "title": "Self-prompting semantic segmentation of bridge point cloud data using a large computer vision model",
+            "authors": [
+                "Na Cui",
+                "Hanxin Chen",
+                "Xiaocheng Guo",
+                "Yan Zeng",
+                "Zhengqi Hua",
+                "Guikai Xiong",
+                "Renbin Yue",
+                "Jiepeng Liu"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        },
+        {
+            "title": "Integrating multimodal contrastive learning with prototypical domain alignment for unsupervised domain adaptation of time series",
+            "authors": [
+                "Seo-Hyeong Park",
+                "Nur Suriza Syazwany",
+                "Ju-Hyeon Nam",
+                "Sang-Chul Lee"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        },
+        {
+            "title": "Hierarchical Multi-Modal Fusion for Language-Conditioned Robotic Grasping Detection in Clutter",
+            "authors": [
+                "Jin Liu",
+                "Jialong Xie",
+                "Leibing Xiao",
+                "Chaoqun Wang",
+                "Fengyu Zhou"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        },
+        {
+            "title": "Full-view salient feature mining and alignment for text-based person search",
+            "authors": [
+                "Sheng Xie",
+                "Canlong Zhang",
+                "Enhao Ning",
+                "Zhixin Li",
+                "Zhiwen Wang",
+                "Chunrong Wei"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        },
+        {
+            "title": "Few-shot learning for structural health diagnosis of civil infrastructure",
+            "authors": [
+                "Yang Xu",
+                "Yunlei Fan",
+                "Y. Bao",
+                "Hui Li"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        },
+        {
+            "title": "Image generation of hazardous situations in construction sites using text-to-image generative model for training deep neural networks",
+            "authors": [
+                "Hayoung Kim",
+                "June-Seong Yi"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        },
+        {
+            "title": "BagFormer: Better cross-modal retrieval via bag-wise interaction",
+            "authors": [
+                "Haowen Hou",
+                "Xiaopeng Yan",
+                "Yigeng Zhang"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        },
+        {
+            "title": "Parallel weight control based on policy gradient of relation refinement for cross-modal retrieval",
+            "authors": [
+                "Li Zhang",
+                "Yahu Yang",
+                "Shuheng Ge",
+                "Guanghui Sun",
+                "Xiangqian Wu"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        },
+        {
+            "title": "Probing vision and language models for construction waste material recognition",
+            "authors": [
+                "Ying Sun",
+                "Zhaolin Gu",
+                "Sean Bin Yang"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        },
+        {
+            "title": "High-fidelity instructional fashion image editing",
+            "authors": [
+                "Yinglin Zheng",
+                "Ting Zhang",
+                "Jianmin Bao",
+                "Dong Chen",
+                "Ming Zeng"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        },
+        {
+            "title": "SARD: Fake news detection based on CLIP contrastive learning and multimodal semantic alignment",
+            "authors": [
+                "Facheng Yan",
+                "Mingshu Zhang",
+                "Bin Wei",
+                "Kelan Ren",
+                "Wen Jiang"
+            ],
+            "year": 2024,
+            "citationCount": null,
+            "doi": null
+        }
+    ]
+}
