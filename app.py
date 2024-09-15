@@ -2,8 +2,10 @@ import time
 from flask import jsonify, request
 import requests
 from config.app import app
+from graph.app import generate_citation_graph
 from reddit.route import analyze_sentiment as analyze_reddit, fetch_reddit_posts
 from search.fetch_recent_arxiv_papers import get_recent_papers
+import networkx as nx
 from fetch_arxiv_paper_with_citations import fetch_top_citations, fetch_arxiv_paper
 from flask_cors import CORS
 
@@ -170,7 +172,6 @@ def analyze_sentiment():
             "error": str(e),
             "token_count": len(text.split())
         }), 500
-
 
 
 @app.route('/citation_graph', methods=['GET'])

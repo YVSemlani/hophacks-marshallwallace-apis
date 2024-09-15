@@ -22,21 +22,6 @@ def get_recommendations(paper_id, limit=5):
     else:
         return None
 
-@app.route('/recommend', methods=['GET'])
-def recommend_papers():
-    paper_id = request.args.get('paper_id')
-    limit = request.args.get('limit', default=5, type=int)
-    
-    if not paper_id:
-        return jsonify({"error": "Missing paper_id parameter"}), 400
-    
-    recommendations = get_recommendations(paper_id, limit)
-    
-    if recommendations:
-        return jsonify(recommendations)
-    else:
-        return jsonify({"error": "Unable to fetch recommendations"}), 500
-
 # Example URL to test this endpoint:
 # http://127.0.0.1:5000/recommend?paper_id=1706.03762&limit=10
 # Replace '123456' with a valid paper ID and adjust the limit as needed
