@@ -2,7 +2,7 @@ import arxiv
 import json
 from datetime import datetime
 
-def fetch_recent_arxiv_papers(categories, search_term, max_results=30):
+def fetch_recent_abstracts(categories, search_term, max_results=20):
     all_papers = []
     
     # Create an arXiv Client
@@ -15,29 +15,21 @@ def fetch_recent_arxiv_papers(categories, search_term, max_results=30):
 
     search = arxiv.Search(
         query = search_term,
-        max_results = max_results,
+        max_results = 100,
         sort_by = arxiv.SortCriterion.SubmittedDate
     )
 
+    abstracts = []
     for result in client.results(search):
             published_year = result.published.year  # Extract only the year part
             
-            # Extract information about the paper
-            paper_info = {
-                "title": result.title,
-                "authors": [str(author) for author in result.authors],
-                "abstract": result.summary,
-                "categories": result.categories,  # Extract categories for each paper
-                "year": published_year,
-                "arxiv_id": result.entry_id,
-            }
-            all_papers.append(paper_info)
+            abstracts.append(result.summary)
 
-    return all_papers
+    return abstracts
 
 def get_recent_papers(search_term):
     categories = ["cs.LG", "cs.AI", "cs.CV", "cs.GT", "cs.CE"]
-    papers = fetch_recent_arxiv_papers(categories, search_term)
+    papers = fetch_recent_abstracts(categories, search_term)
     return papers
 
 if __name__ == "__main__":
