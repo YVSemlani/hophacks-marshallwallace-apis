@@ -7,10 +7,16 @@ from reddit.route import analyze_sentiment as analyze_reddit, fetch_reddit_posts
 from search.fetch_recent_arxiv_papers import get_recent_papers
 import networkx as nx
 from fetch_arxiv_paper_with_citations import fetch_top_citations, fetch_arxiv_paper
+#from flask_cors import CORS
+
+#CORS(app)
 
 # Add these constants from the recommender-api
 CORE_API_KEY = "vCbYHT3eRx58FdjOgAlwkLKWEG4U6QNi"
 CORE_API_URL = "https://api.core.ac.uk/v3/recommend"
+
+OPENROUTER_API_KEY = "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" #os.getenv('OPENROUTER_API_KEY')
+OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 # Add this function from the recommender-api
 def get_recommendations(data):
@@ -189,6 +195,66 @@ def citation_graph():
         return jsonify({"error": str(e)}), 500
     
     return jsonify(original_paper)
+
+def create_json(search_term):
+    abstracts = get_recent_papers(search_term)
+    json = {
+        "abstracts": abstracts,
+        "search_term": search_term
+    }
+    return json
+
+@app.route('/hot-or-not', methods=['GET', 'OPTIONS'])
+def hot_or_not():
+    search_term = request.args.get('search_term')
+    if not search_term:
+        print(request.args)
+        return jsonify({"error": "No search term provided"}), 400
+
+    text = create_json(search_term)
+    prompt = f'''I am providing you with a set of abstracts for research papers. I am also providing you with a search term.
+    Your goal is to determine, given the content of the abstracts, whether the research topic indicated by the search term is currently 'hot' and forecast its future.
+    You should use the content of the abstracts, prior knowledge of the topic, your knowledge of the search term, and any statistics on the papers to determine the current state of the field and its future.
+    Explain your reasoning in  a brief paragraph that ends with a recommendation of whether the field is 'hot' or 'not' using the fire emoji or the frozen fire emoji. 
+    
+    The format of the output should be text in this:
+
+    [
+        "reasoning": "<brief paragraph explaining your reasoning>",
+        "recommendation": "<'fire' or 'frozen'>"
+    ]
+
+    Your input will be provided as JSON data where each abstract will be associated with a search term. The search term should be the same for all abstracts.
+    JSON: {text}'''
+
+    headers = {
+        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+        "Content-Type": "application/json"
+    }
+
+    payload = {
+        "model": "openai/gpt-4o-mini-2024-07-18",  # You can change this to other models supported by OpenRouter
+        "messages": [{"role": "user", "content": prompt}]
+    }
+
+    try:
+        print("checkpoint 1: Before API call")
+        response = requests.post(OPENROUTER_URL, headers=headers, json=payload)
+        print("checkpoint 2: After API call")
+        response.raise_for_status()
+        print("checkpoint 3: After raise_for_status")
+        result = response.json()
+        print("checkpoint 4: After parsing JSON")
+        ai_response = result['choices'][0]['message']['content']
+        print("checkpoint 5: After extracting AI response")
+        # Replace 'frozen' with the frozen face emoji and 'fire' with the fire emoji
+        ai_response = ai_response.replace("'frozen'", "'🥶'")
+        ai_response = ai_response.replace("'fire'", "'🔥'")
+        print(ai_response)
+        return jsonify({"result": ai_response})
+    except requests.exceptions.RequestException as e:
+        print(f"checkpoint error: {str(e)}")
+        return jsonify({"error": f"Error calling OpenRouter API: {str(e)}"}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
