@@ -2,8 +2,10 @@ import time
 from flask import jsonify, request
 import requests
 from config.app import app
+from graph.app import generate_citation_graph
 from reddit.route import analyze_sentiment as analyze_reddit, fetch_reddit_posts
 from search.fetch_recent_arxiv_papers import get_recent_papers
+import networkx as nx
 
 @app.route("/")
 def welcome():
@@ -119,6 +121,18 @@ def analyze_sentiment():
             "token_count": len(text.split())
         }), 500
 
+@app.route('/citation_graph', methods=['GET'])
+def citation_graph():
+    arxiv_id = request.args.get('arxiv_id', default='', type=str)
+    if not arxiv_id:
+        return jsonify({"error": "No arXiv ID provided"}), 400
+
+    graph = generate_citation_graph(arxiv_id)
+    
+    # Convert the graph to a dictionary format
+    graph_dict = nx.node_link_data(graph)
+    
+    return jsonify(graph_dict)
 
 
 if __name__ == '__main__':
