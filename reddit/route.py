@@ -25,7 +25,7 @@ reddit = praw.Reddit(
 if not OPENROUTER_API_KEY:
     raise ValueError("OPENROUTER_API_KEY environment variable is not set")
 
-def fetch_reddit_posts(keyword, limit=6):
+def fetch_reddit_posts(keyword, limit=10):
     subreddit = reddit.subreddit('all')
     posts = []
     for submission in subreddit.search(keyword, limit=limit):
