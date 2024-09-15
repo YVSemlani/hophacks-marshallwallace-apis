@@ -5,6 +5,51 @@ from config.app import app
 from reddit.route import analyze_sentiment as analyze_reddit, fetch_reddit_posts
 from search.fetch_recent_arxiv_papers import get_recent_papers
 
+# Add these constants from the recommender-api
+CORE_API_KEY = "vCbYHT3eRx58FdjOgAlwkLKWEG4U6QNi"
+CORE_API_URL = "https://api.core.ac.uk/v3/recommend"
+
+# Add this function from the recommender-api
+def get_recommendations(data):
+    headers = {
+        "Authorization": f"Bearer {CORE_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    
+    response = requests.post(CORE_API_URL, headers=headers, json=data)
+    
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Error: {response.status_code}, {response.text}")
+        return None
+
+# Add this new route from the recommender-api
+@app.route('/recommend', methods=['POST'])
+def recommend_papers():
+    data = request.json
+    required_params = ['limit', 'identifier', 'abstract', 'title']
+    data['text'] = data['abstract']
+    data['result_type'] = 'article'
+    
+    for param in required_params:
+        if param not in data:
+            return jsonify({"error": f"Missing required parameter: {param}"}), 400
+    
+    # Optional parameters
+    if 'authors' in data and not isinstance(data['authors'], list):
+        return jsonify({"error": "Authors must be an array of strings"}), 400
+    
+    if 'data_provider_id' in data and not (isinstance(data['data_provider_id'], int) or data['data_provider_id'] is None):
+        return jsonify({"error": "data_provider_id must be an integer or null"}), 400
+    
+    recommendations = get_recommendations(data)
+    
+    if recommendations:
+        return jsonify(recommendations)
+    else:
+        return jsonify({"error": "Unable to fetch recommendations"}), 500
+
 @app.route("/")
 def welcome():
     return "Welcome to Spotinder!"

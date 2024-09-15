@@ -37,5 +37,9 @@ def recommend_papers():
     else:
         return jsonify({"error": "Unable to fetch recommendations"}), 500
 
+# Example URL to test this endpoint:
+# http://127.0.0.1:5000/recommend?paper_id=1706.03762&limit=10
+# Replace '123456' with a valid paper ID and adjust the limit as needed
+
 if __name__ == '__main__':
     app.run(debug=True)
