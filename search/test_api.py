@@ -1,7 +1,7 @@
 import requests
 import json
 
-API_URL = "http://localhost:3000/recent_papers"
+API_URL = "http://localhost:5000/recent_papers"
 
 def test_recent_papers_api(search_term):
     params = {"search_term": search_term}

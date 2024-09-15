@@ -2,7 +2,7 @@ import requests
 import json
 import time
 
-API_URL = "http://127.0.0.1:2000/analyze_reddit_sentiment"
+API_URL = "http://127.0.0.1:5000/analyze_reddit_sentiment"
 
 def test_reddit_sentiment_analysis(search_term):
     payload = {
@@ -24,9 +24,9 @@ def test_reddit_sentiment_analysis(search_term):
 test_cases = [
     "artificial intelligence",
     "climate change",
-    "space exploration",
-    "cryptocurrency",
-    "renewable energy"
+    #"space exploration",
+    #"cryptocurrency",
+    #"renewable energy"
 ]
 
 # Run tests

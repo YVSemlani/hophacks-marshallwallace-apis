@@ -15,7 +15,7 @@ def fetch_recent_arxiv_papers(categories, search_term, max_results=100):
 
     search = arxiv.Search(
         query = search_term,
-        max_results = 100,
+        max_results = 10,
         sort_by = arxiv.SortCriterion.SubmittedDate
     )
 

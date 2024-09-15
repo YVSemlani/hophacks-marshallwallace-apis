@@ -4,7 +4,8 @@ import os
 import praw
 from dotenv import load_dotenv
 import time
-app = Flask(__name__)
+
+from config.app import app
 
 # Load environment variables
 load_dotenv()
@@ -24,7 +25,7 @@ reddit = praw.Reddit(
 if not OPENROUTER_API_KEY:
     raise ValueError("OPENROUTER_API_KEY environment variable is not set")
 
-def fetch_reddit_posts(keyword, limit=10):
+def fetch_reddit_posts(keyword, limit=2):
     subreddit = reddit.subreddit('all')
     posts = []
     for submission in subreddit.search(keyword, limit=limit):
@@ -59,41 +60,3 @@ def analyze_sentiment(text, search_term):
     except ValueError:
         return None
 
-@app.route('/analyze_reddit_sentiment', methods=['POST'])
-def analyze_reddit_sentiment():
-    data = request.json
-    if 'search_term' not in data:
-        return jsonify({"error": "No search term provided"}), 400
-
-    search_term = data['search_term']
-    posts = fetch_reddit_posts(search_term)
-    
-    sentiments = []
-    for post in posts:
-        while True:
-            try:
-                print("Analyzing sentiment for post: ", post)
-                sentiment = analyze_sentiment(post, search_term)
-                if sentiment is not None:
-                    sentiments.append(sentiment)
-                break
-            except requests.exceptions.HTTPError as e:
-                print("Error: ", e)
-                if e.response.status_code == 429:
-                    time.sleep(11)  # Wait for 5 seconds before retrying
-                else:
-                    raise
-
-    if sentiments:
-        average_sentiment = sum(sentiments) / len(sentiments)
-    else:
-        average_sentiment = 0
-
-    return jsonify({
-        "search_term": search_term,
-        "average_sentiment": average_sentiment,
-        "num_posts_analyzed": len(sentiments)
-    })
-
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=2000)

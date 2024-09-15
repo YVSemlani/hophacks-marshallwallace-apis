@@ -1,7 +1,7 @@
-from flask import Flask, request, jsonify
+from flask import request, jsonify
+from config.app import app
 from fetch_recent_arxiv_papers import get_recent_papers
 
-app = Flask(__name__)
 
 @app.route('/recent_papers', methods=['GET'])
 def recent_papers():
@@ -11,6 +11,3 @@ def recent_papers():
     
     papers = get_recent_papers(search_term)
     return jsonify(papers)
-
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=3000)
