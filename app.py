@@ -167,19 +167,6 @@ def analyze_sentiment():
             "token_count": len(text.split())
         }), 500
 
-@app.route('/citation_graph', methods=['GET'])
-def citation_graph():
-    arxiv_id = request.args.get('arxiv_id', default='', type=str)
-    if not arxiv_id:
-        return jsonify({"error": "No arXiv ID provided"}), 400
-
-    graph = generate_citation_graph(arxiv_id)
-    
-    # Convert the graph to a dictionary format
-    graph_dict = nx.node_link_data(graph)
-    
-    return jsonify(graph_dict)
-
 
 @app.route('/citation_graph', methods=['GET'])
 def citation_graph():
