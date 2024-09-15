@@ -4,6 +4,7 @@ import requests
 from config.app import app
 from reddit.route import analyze_sentiment as analyze_reddit, fetch_reddit_posts
 from search.fetch_recent_arxiv_papers import get_recent_papers
+from fetch_arxiv_paper_with_citations import fetch_top_citations, fetch_arxiv_paper
 
 # Add these constants from the recommender-api
 CORE_API_KEY = "vCbYHT3eRx58FdjOgAlwkLKWEG4U6QNi"
@@ -165,6 +166,28 @@ def analyze_sentiment():
         }), 500
 
 
+
+@app.route('/citation_graph', methods=['GET'])
+def citation_graph():
+    arxiv_id = request.args.get('arxiv_id')
+    if not arxiv_id:
+        return jsonify({"error": "No arXiv ID provided"}), 400
+    
+    try:
+        original_paper = fetch_arxiv_paper(arxiv_id)
+        top_citations = fetch_top_citations(arxiv_id, 'arxiv')
+
+        for idx, paper in enumerate(top_citations):
+            tertiary_citations = fetch_top_citations(paper['doi'], 'doi')
+            top_citations[idx]['top_citations'] = tertiary_citations
+
+        original_paper['top_citations'] = top_citations
+    except Exception as e:
+        if original_paper is None:
+            return jsonify({"error": "Invalid Arxiv ID"}), 500
+        return jsonify({"error": str(e)}), 500
+    
+    return jsonify(original_paper)
 
 if __name__ == '__main__':
     app.run(debug=True)
